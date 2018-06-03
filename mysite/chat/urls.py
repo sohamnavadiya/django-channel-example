@@ -5,6 +5,6 @@ from . import views
 
 urlpatterns = [
     # path('', views.index, name='index'),
-    path('record/abc/', Record.as_view(), name='record'),
+    path('web/record/<slug:channel_name>/', Record.as_view(), name='record'),
     path('<slug:slug>/', views.room, name='room'),
 ]
