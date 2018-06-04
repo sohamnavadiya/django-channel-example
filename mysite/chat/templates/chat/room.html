@@ -6,9 +6,9 @@
     <title>Chat Room</title>
 </head>
 <body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
-    <input id="chat-message-input" type="text" size="100"/><br/>
-    <input id="chat-message-submit" type="button" value="Send"/>
+    <textarea id="chat-log" cols="120" rows="35"></textarea><br/>
+    <!--<input id="chat-message-input" type="text" size="100"/><br/>-->
+    <!--<input id="chat-message-submit" type="button" value="Send"/>-->
 </body>
 <script>
     var roomName = {{ room_name_json }};
@@ -19,7 +19,28 @@
 
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
-        var message = data['message'];
+        var sid = data['sid'];
+        var event = data['event'];
+        var cid = data['cid'];
+        var call_member = data['call_member'];
+        var request_time = data['request_time'];
+        var call_member = data['call_member'];
+        var circle = data['circle'];
+        var operator = data['operator'];
+        var cid_type = data['cid_type'];
+        var cid_e164 = data['cid_e164'];
+        var cid_country = data['cid_country'];
+        var total_call_duration = data['total_call_duration'];
+        var data = data['data'];
+        var status = data['status'];
+        var rec_md5_checksum = data['rec_md5_checksum'];
+        var record_duration = data['record_duration'];
+        var called_number = data['called_number'];
+
+        var message = event + '-' + sid + '-' + cid + '-' + call_member + '-' + request_time + '-' + call_member
+        + '-' + circle + '-' + operator + '-' + cid_type + '-' + cid_e164 + '-' + cid_country + '-' +  total_call_duration +
+        '-' + data + '-' + status + '-' + rec_md5_checksum + '-' + record_duration + '-' + called_number
+
         document.querySelector('#chat-log').value += (message + '\n');
     };
 

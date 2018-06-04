@@ -38,11 +38,40 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
     async def chat_messages(self, event):
-        message = event['message']
-        print("Send: %s" % message)
+        sid=event['sid']
+        _event=event['event']
+        cid=event['cid']
+        call_member=event['called_number']
+        request_time=event['request_time']
+        circle=event['circle']
+        operator=event['operator']
+        cid_type=event['cid_type']
+        cid_e164=event['cid_e164']
+        cid_country=event['cid_country']
+        total_call_duration=event['total_call_duration']
+        data=event['data']
+        status=event['status']
+        rec_md5_checksum=event['rec_md5_checksum']
+        record_duration=event['record_duration']
+        called_number=event['called_number']
+
+        # print("Send: %s" % message)
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
-            'message': message,
-            'type': 'kookoo',
-            'show': 'popup'
+            'sid': sid,
+            'event': _event,
+            'cid': cid,
+            'call_member': call_member,
+            'request_time': request_time,
+            'circle': circle,
+            'operator': operator,
+            'cid_type': cid_type,
+            'cid_e164': cid_e164,
+            'cid_country': cid_country,
+            'total_call_duration': total_call_duration,
+            'data': data,
+            'status': status,
+            'rec_md5_checksum': rec_md5_checksum,
+            'record_duration': record_duration,
+            'called_number': called_number
         }))
