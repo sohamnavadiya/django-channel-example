@@ -1,4 +1,6 @@
 import json
+from xml.dom import minidom
+from xml.etree import ElementTree
 
 from aioredis import Channel
 from asgiref.sync import async_to_sync
@@ -20,8 +22,34 @@ def index(request):
 
 
 def room(request, slug):
+    from random import randint
+
+    def random_with_N_digits(n):
+        range_start = 10 ** (n - 1)
+        range_end = (10 ** n) - 1
+        return randint(range_start, range_end)
+
+    import xml.etree.ElementTree as ET
+    # create the file structure
+    data = ET.Element('response')
+    items = ET.SubElement(data, 'record')
+    items.set('format', 'wav')
+    items.set('silence', '3')
+    items.set('maxduration', '30')
+    items.text = '%s' % random_with_N_digits(7)
+
+    # item1 = ET.SubElement(items, 'item')
+    # item2 = ET.SubElement(items, 'item')
+    # item1.set('name', 'item1')
+    # item2.set('name', 'item2')
+    # item1.text = 'item1abc'
+    # item2.text = 'item2abc'
+
+    # create a new XML file with the results
+    mydata = ET.tostring(data)
     return render(request, 'chat/room.html', {
-        'room_name_json': mark_safe(json.dumps(slug))
+        'room_name_json': mark_safe(json.dumps(slug)),
+        'kookoo_xml': mydata
     })
 
 
@@ -96,6 +124,32 @@ class VoiceRecordTemplate(TemplateView):
             'record_duration': request.GET.get('record_duration', None),
             'called_number': request.GET.get('called_number', None)
         })
+        #
+        # import xml.etree.ElementTree as ET
+        # # create the file structure
+        # data = ET.Element('response')
+        # items = ET.SubElement(data, 'record')
+        # items.set('format', 'wav')
+        # items.set('silence', '3')
+        # items.set('maxduration', '30')
+        # items.text = '%s' % random_with_N_digits(7)
+        #
+        # # item1 = ET.SubElement(items, 'item')
+        # # item2 = ET.SubElement(items, 'item')
+        # # item1.set('name', 'item1')
+        # # item2.set('name', 'item2')
+        # # item1.text = 'item1abc'
+        # # item2.text = 'item2abc'
+        # mydata = ET.tostring(data)
+
+
+        # import xml.dom.minidom
+        # xml = xml.dom.minidom.parseString(mydata)  # or xml.dom.minidom.parseString(xml_string)
+        # pretty_xml_as_string = xml.toprettyxml()
+
+        # rough_string = ElementTree.tostring(data, 'utf-8')
+        # reparsed = minidom.parseString(rough_string)
+        # mydata = reparsed.toprettyxml(indent="\t")
 
         # if request.GET.get('event', None) == 'Hangup':
         #      # TODO: Send Message:
