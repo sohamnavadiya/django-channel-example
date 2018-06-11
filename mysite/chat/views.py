@@ -69,6 +69,14 @@ class RecordAPIView(APIView):
         return Response({"test": "working..."})
 
 
+class REDView(APIView):
+    def get(self, request):
+        # Send message to room group
+        print(request.GET)
+
+        return Response({"test": "working..."})
+
+
 class VoiceRecordTemplate(TemplateView):
     def get(self, request, **kwargs):
         # print("Event is: %s" % request.GET)
