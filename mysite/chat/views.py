@@ -70,9 +70,15 @@ class RecordAPIView(APIView):
 
 
 class REDView(APIView):
-    def get(self, request):
+    def post(self, request):
         # Send message to room group
-        print(request.GET)
+        print(request.POST)
+        print(request.POST.get('phone_no'))
+        print(request.POST.get('status'))
+        print(request.POST.get('sid'))
+        print(request.POST.get('caller_id'))
+        print(request.POST.get('duration'))
+        print(request.POST.get('telco_code'))
 
         return Response({"test": "working..."})
 
