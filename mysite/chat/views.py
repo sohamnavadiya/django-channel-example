@@ -100,30 +100,30 @@ class VoiceRecordTemplate(TemplateView):
         )
         _record.save()
 
-        from channels.layers import get_channel_layer
-        channel_layer = get_channel_layer()
-        print(channel_layer.group_send)
-        from asgiref.sync import async_to_sync
+#        from channels.layers import get_channel_layer
+#        channel_layer = get_channel_layer()
+#        print(channel_layer.group_send)
+#        from asgiref.sync import async_to_sync
 
-        async_to_sync(channel_layer.group_send)("chat_soham", {
-            'type': 'chat_messages',
-            'sid': request.GET.get('sid', None),
-            'event': request.GET.get('event', None),
-            'cid': request.GET.get('cid', None),
-            'call_member': request.GET.get('called_number', None),
-            'request_time': request.GET.get('request_time', None),
-            'circle': request.GET.get('circle', None),
-            'operator': request.GET.get('operator', None),
-            'cid_type': request.GET.get('cid_type', None),
-            'cid_e164': request.GET.get('cid_e164', None),
-            'cid_country': request.GET.get('cid_country', None),
-            'total_call_duration': request.GET.get('total_call_duration', None),
-            'data': request.GET.get('data', None),
-            'status': request.GET.get('status', None),
-            'rec_md5_checksum': request.GET.get('rec_md5_checksum', None),
-            'record_duration': request.GET.get('record_duration', None),
-            'called_number': request.GET.get('called_number', None)
-        })
+#        async_to_sync(channel_layer.group_send)("chat_soham", {
+#            'type': 'chat_messages',
+#            'sid': request.GET.get('sid', None),
+#            'event': request.GET.get('event', None),
+#            'cid': request.GET.get('cid', None),
+#            'call_member': request.GET.get('called_number', None),
+#            'request_time': request.GET.get('request_time', None),
+#            'circle': request.GET.get('circle', None),
+#            'operator': request.GET.get('operator', None),
+#            'cid_type': request.GET.get('cid_type', None),
+#            'cid_e164': request.GET.get('cid_e164', None),
+#            'cid_country': request.GET.get('cid_country', None),
+#            'total_call_duration': request.GET.get('total_call_duration', None),
+#            'data': request.GET.get('data', None),
+#            'status': request.GET.get('status', None),
+#            'rec_md5_checksum': request.GET.get('rec_md5_checksum', None),
+#            'record_duration': request.GET.get('record_duration', None),
+#            'called_number': request.GET.get('called_number', None)
+#        })
         #
         # import xml.etree.ElementTree as ET
         # # create the file structure
