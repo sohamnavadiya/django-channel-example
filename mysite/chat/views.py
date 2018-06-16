@@ -10,6 +10,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from twisted.words.service import Group
@@ -82,6 +83,15 @@ class REDView(APIView):
 
         return Response({"test": "working..."})
 
+
+class AlexaView(APIView):
+    def get(self, request):
+        response = {
+           "skill": "alexa",
+           "status": "working"
+        }
+
+        return Response(response, status=status.HTTP_200_OK)
 
 class VoiceRecordTemplate(TemplateView):
     def get(self, request, **kwargs):
