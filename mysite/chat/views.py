@@ -87,8 +87,9 @@ class REDView(APIView):
 class AlexaView(APIView):
     def get(self, request):
         response = {
-           "skill": "alexa",
-           "status": "working"
+            "company": "raunakgroup",
+            "current_campaign": "subse sasta ghar",
+            "total_lead": "50"
         }
 
         return Response(response, status=status.HTTP_200_OK)
