@@ -126,7 +126,7 @@ class VoiceRecordTemplate(TemplateView):
         _record.save()
 
         if request.GET.get('event', None) == 'Dial' or request.GET.get('event', None) == 'Hangup':
-            return render(request, 'chat/record.html', context={'file_name': random_with_N_digits(7)})
+            return render(request, 'chat/hangup.html', context={'file_name': random_with_N_digits(7)})
 
         from channels.layers import get_channel_layer
         channel_layer = get_channel_layer()
